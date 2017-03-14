@@ -22,6 +22,7 @@ import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
 import selebee.interfaces.generic.IClickable;
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
@@ -30,7 +31,7 @@ import selebee.interfaces.generic.IClickable;
  */
 public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
 		implements IClickable <TResult> {
-	private final Function <IClickable <TResult>, TResult> target;
+	private final Function <Session, TResult> target;
 
 	/**
 	 * @author wasiq.bhamla
@@ -39,7 +40,7 @@ public class Clickable <TResult extends IBlock> extends selebee.implementation.C
 	 * @param locator
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <IClickable <TResult>, TResult> target) {
+	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
 		super (parent, locator);
 		this.target = target;
 	}
@@ -51,8 +52,7 @@ public class Clickable <TResult extends IBlock> extends selebee.implementation.C
 	 * @param tag
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final WebElement tag,
-			final Function <IClickable <TResult>, TResult> target) {
+	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
 		super (parent, tag);
 		this.target = target;
 	}

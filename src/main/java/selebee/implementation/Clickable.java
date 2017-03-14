@@ -23,7 +23,7 @@ import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
 import selebee.interfaces.IClickable;
-import selebee.interfaces.IElement;
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
@@ -55,9 +55,9 @@ public class Clickable extends Element implements IClickable {
 	 * @see selebee.interfaces.IClickable#click(java.util.function.Function)
 	 */
 	@Override
-	public <TResult extends IBlock, T extends IElement> TResult click (final Function <T, TResult> target) {
+	public <TResult extends IBlock> TResult click (final Function <Session, TResult> target) {
 		Objects.requireNonNull (target);
 		tag ().click ();
-		return target.apply ((T) this);
+		return target.apply (session ());
 	}
 }

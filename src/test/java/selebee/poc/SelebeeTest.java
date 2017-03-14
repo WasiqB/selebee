@@ -21,7 +21,6 @@ import org.testng.annotations.Test;
 import selebee.poc.pages.MyStorePage;
 import selebee.poc.pages.SignInPage;
 import selebee.setup.Chrome;
-import selebee.setup.Session;
 import selebee.setup.ThreadedSession;
 
 /**
@@ -46,15 +45,15 @@ public class SelebeeTest {
 	 */
 	@Test
 	public void test1 () {
-		final Session s = ThreadedSession.with (e -> new Chrome ());
-		s.navigateTo (url, e -> new SignInPage (e))
+		ThreadedSession.with (e -> new Chrome ())
+			.navigateTo (url, e -> new SignInPage (e))
 			.email ()
 			.enterText ("wasbhamla2005@gmail.com")
 			.password ()
 			.enterText ("Wasiq@786")
 			.signIn ()
-			.click (e -> new MyStorePage (s))
+			.click (e -> new MyStorePage (e))
 			.signOut ()
-			.click (e -> new SignInPage (s));
+			.click (e -> new SignInPage (e));
 	}
 }

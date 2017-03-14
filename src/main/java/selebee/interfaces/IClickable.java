@@ -17,6 +17,8 @@ package selebee.interfaces;
 
 import java.util.function.Function;
 
+import selebee.setup.Session;
+
 /**
  * @author wasiq.bhamla
  * @since 05-Mar-2017 6:10:26 PM
@@ -28,5 +30,5 @@ public interface IClickable extends IElement, IHasText {
 	 * @since 05-Mar-2017 6:12:33 PM
 	 * @return result
 	 */
-	<TResult extends IBlock, T extends IElement> TResult click (Function <T, TResult> target);
+	<TResult extends IBlock> TResult click (Function <Session, TResult> target);
 }
