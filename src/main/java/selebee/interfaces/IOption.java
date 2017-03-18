@@ -17,8 +17,8 @@ package selebee.interfaces;
 
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @since 16-Mar-2017 5:23:07 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface IOption extends IClickable, ISelectable {
+	// Marker Interface.
 }

@@ -1,17 +1,17 @@
 /**
- *    Copyright 2017 Wasiq Amjad Bhamla
+ * Copyright (c) 2017, Wasiq Bhamla.
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package selebee.implementation;
 
@@ -23,8 +23,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.IElement;
 import selebee.interfaces.ITextField;
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
@@ -56,13 +56,12 @@ public class TextField extends Element implements ITextField {
 	 * @see selebee.interfaces.ITextField#appendText(java.lang.String, java.util.function.Function)
 	 */
 	@Override
-	public <TResult extends IBlock, T extends IElement> TResult appendText (final String text,
-			final Function <T, TResult> target) {
+	public <TResult extends IBlock> TResult appendText (final String text, final Function <Session, TResult> target) {
 		Objects.requireNonNull (target);
 		for (final char c : text.toCharArray ()) {
 			tag ().sendKeys (Character.toString (c));
 		}
-		return target.apply ((T) this);
+		return target.apply (session ());
 	}
 
 	/*
@@ -70,8 +69,7 @@ public class TextField extends Element implements ITextField {
 	 * @see selebee.interfaces.ITextField#enterText(java.lang.String, java.util.function.Function)
 	 */
 	@Override
-	public <TResult extends IBlock, T extends IElement> TResult enterText (final String text,
-			final Function <T, TResult> target) {
+	public <TResult extends IBlock> TResult enterText (final String text, final Function <Session, TResult> target) {
 		tag ().clear ();
 		return appendText (text, target);
 	}
@@ -82,11 +80,10 @@ public class TextField extends Element implements ITextField {
 	 * java.util.function.Function)
 	 */
 	@Override
-	public <TResult extends IBlock, T extends IElement> TResult press (final Keys key,
-			final Function <T, TResult> target) {
+	public <TResult extends IBlock> TResult press (final Keys key, final Function <Session, TResult> target) {
 		Objects.requireNonNull (target);
 		tag ().sendKeys (key);
-		return target.apply ((T) this);
+		return target.apply (session ());
 	}
 
 	/*

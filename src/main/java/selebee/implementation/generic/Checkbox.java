@@ -21,48 +21,65 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.generic.IClickable;
+import selebee.interfaces.generic.ICheckbox;
 import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
  * @param <TResult>
- * @since 13-Mar-2017 11:02:23 PM
+ * @since 16-Mar-2017 9:40:31 PM
  */
-public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
-		implements IClickable <TResult> {
-	protected final Function <Session, TResult> target;
+public class Checkbox <TResult extends IBlock> extends selebee.implementation.Checkbox implements ICheckbox <TResult> {
+	private final Function <Session, TResult> target;
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:40:31 PM
 	 * @param parent
 	 * @param locator
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
+	public Checkbox (final IBlock parent, final By locator, final Function <Session, TResult> target) {
 		super (parent, locator);
 		this.target = target;
 	}
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:40:31 PM
 	 * @param parent
 	 * @param tag
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
+	public Checkbox (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
 		super (parent, tag);
 		this.target = target;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see selebee.interfaces.generic.IClickable#click()
+	 * @see selebee.interfaces.generic.ICheckbox#check()
 	 */
 	@Override
-	public TResult click () {
-		return click (this.target);
+	public TResult check () {
+		return check (this.target);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see selebee.interfaces.generic.ICheckbox#toggle()
+	 */
+	@Override
+	public TResult toggle () {
+		return toggle (this.target);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see selebee.interfaces.generic.ICheckbox#uncheck()
+	 */
+	@Override
+	public TResult uncheck () {
+		return uncheck (this.target);
 	}
 }

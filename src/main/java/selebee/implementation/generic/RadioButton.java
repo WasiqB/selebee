@@ -21,48 +21,45 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.generic.IClickable;
 import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
  * @param <TResult>
- * @since 13-Mar-2017 11:02:23 PM
+ * @since 18-Mar-2017 12:15:30 PM
  */
-public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
-		implements IClickable <TResult> {
-	protected final Function <Session, TResult> target;
-
+public class RadioButton <TResult extends IBlock> extends Option <TResult> {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 18-Mar-2017 12:17:12 PM
 	 * @param parent
 	 * @param locator
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
-		super (parent, locator);
-		this.target = target;
+	public RadioButton (final IBlock parent, final By locator, final Function <Session, TResult> target) {
+		super (parent, locator, target);
 	}
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 18-Mar-2017 12:17:16 PM
 	 * @param parent
 	 * @param tag
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
-		super (parent, tag);
-		this.target = target;
+	public RadioButton (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
+		super (parent, tag, target);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see selebee.interfaces.generic.IClickable#click()
+	 * @see selebee.implementation.Element#text()
 	 */
 	@Override
-	public TResult click () {
-		return click (this.target);
+	public String text () {
+		final String locator = "label[for=\"" + tag ().getAttribute ("id") + "\"]";
+		return parentBlock ().tag ()
+			.findElement (By.cssSelector (locator))
+			.getText ();
 	}
 }

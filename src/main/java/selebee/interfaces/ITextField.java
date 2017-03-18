@@ -1,23 +1,25 @@
 /**
- *    Copyright 2017 Wasiq Amjad Bhamla
+ * Copyright (c) 2017, Wasiq Bhamla.
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package selebee.interfaces;
 
 import java.util.function.Function;
 
 import org.openqa.selenium.Keys;
+
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
@@ -31,7 +33,7 @@ public interface ITextField extends IElement, IHasText {
 	 * @param target
 	 * @return result
 	 */
-	<TResult extends IBlock, T extends IElement> TResult appendText (String text, Function <T, TResult> target);
+	<TResult extends IBlock> TResult appendText (String text, Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
@@ -40,7 +42,7 @@ public interface ITextField extends IElement, IHasText {
 	 * @param target
 	 * @return result
 	 */
-	<TResult extends IBlock, T extends IElement> TResult enterText (String text, Function <T, TResult> target);
+	<TResult extends IBlock> TResult enterText (String text, Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
@@ -49,5 +51,5 @@ public interface ITextField extends IElement, IHasText {
 	 * @param target
 	 * @return result
 	 */
-	<TResult extends IBlock, T extends IElement> TResult press (Keys key, Function <T, TResult> target);
+	<TResult extends IBlock> TResult press (Keys key, Function <Session, TResult> target);
 }

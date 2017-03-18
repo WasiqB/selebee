@@ -13,38 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.setup;
+package selebee.interfaces;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
+import java.util.function.Function;
 
-import org.openqa.selenium.chrome.ChromeDriver;
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
- * @since 13-Mar-2017 3:08:13 PM
+ * @since 16-Mar-2017 5:56:13 PM
  */
-public class Chrome extends SimpleDriverEnvironment <ChromeDriver> {
-	static {
-		final String dir = System.getProperty ("user.dir");
-		final String path = dir + "/src/test/resources/chromedriver.exe";
-		System.setProperty ("webdriver.chrome.driver", path);
-	}
+public interface IDateField extends ITextField {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:58:25 PM
+	 * @param date
+	 * @param target
+	 * @return result
+	 */
+	<TResult extends IBlock> TResult enterDate (Date date, Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 3:08:59 PM
+	 * @since 16-Mar-2017 5:57:44 PM
+	 * @param date
+	 * @param format
+	 * @param target
+	 * @return result
 	 */
-	public Chrome () {
-		super ();
-	}
+	<TResult extends IBlock> TResult enterDate (Date date, String format, Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 3:08:52 PM
-	 * @param timeUnit
-	 * @param time
+	 * @since 16-Mar-2017 5:57:55 PM
+	 * @return value
 	 */
-	public Chrome (final TimeUnit timeUnit, final long time) {
-		super (timeUnit, time);
-	}
+	Date value ();
 }

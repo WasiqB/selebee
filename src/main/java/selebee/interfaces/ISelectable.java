@@ -17,8 +17,13 @@ package selebee.interfaces;
 
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @since 16-Mar-2017 5:21:45 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface ISelectable {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:21:57 PM
+	 * @return isSelected
+	 */
+	boolean selected ();
 }

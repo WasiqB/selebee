@@ -15,54 +15,43 @@
  */
 package selebee.implementation.generic;
 
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.generic.IClickable;
+import selebee.interfaces.generic.IOption;
+import selebee.interfaces.generic.IRadioButton;
 import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
  * @param <TResult>
- * @since 13-Mar-2017 11:02:23 PM
+ * @since 18-Mar-2017 12:36:35 PM
  */
-public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
-		implements IClickable <TResult> {
-	protected final Function <Session, TResult> target;
-
+public class RadioButtons <TResult extends IBlock> extends Clickable <TResult> implements IRadioButton <TResult> {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 18-Mar-2017 12:38:54 PM
 	 * @param parent
 	 * @param locator
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
-		super (parent, locator);
-		this.target = target;
-	}
-
-	/**
-	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
-	 * @param parent
-	 * @param tag
-	 * @param target
-	 */
-	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
-		super (parent, tag);
-		this.target = target;
+	public RadioButtons (final IBlock parent, final By locator, final Function <Session, TResult> target) {
+		super (parent, locator, target);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see selebee.interfaces.generic.IClickable#click()
+	 * @see selebee.interfaces.generic.IRadioButton#options()
 	 */
 	@Override
-	public TResult click () {
-		return click (this.target);
+	public List <IOption <TResult>> options () {
+		return findElements (By.tagName ("option")).stream ()
+			.filter (e -> e.isDisplayed ())
+			.map (e -> new RadioButton <> (this, e, this.target))
+			.collect (Collectors.toList ());
 	}
 }

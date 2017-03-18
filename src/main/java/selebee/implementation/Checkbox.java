@@ -15,49 +15,71 @@
  */
 package selebee.implementation;
 
-import java.util.Objects;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.IClickable;
+import selebee.interfaces.ICheckbox;
 import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
- * @since 13-Mar-2017 10:58:32 PM
+ * @since 16-Mar-2017 9:36:48 PM
  */
-public class Clickable extends Element implements IClickable {
+public class Checkbox extends Element implements ICheckbox {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 10:58:32 PM
+	 * @since 16-Mar-2017 9:36:48 PM
 	 * @param parent
 	 * @param locator
 	 */
-	public Clickable (final IBlock parent, final By locator) {
+	public Checkbox (final IBlock parent, final By locator) {
 		super (parent, locator);
 	}
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 10:58:32 PM
+	 * @since 16-Mar-2017 9:36:48 PM
 	 * @param parent
 	 * @param tag
 	 */
-	public Clickable (final IBlock parent, final WebElement tag) {
+	public Checkbox (final IBlock parent, final WebElement tag) {
 		super (parent, tag);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see selebee.interfaces.IClickable#click(java.util.function.Function)
+	 * @see selebee.interfaces.ICheckbox#check(java.util.function.Function)
 	 */
 	@Override
-	public <TResult extends IBlock> TResult click (final Function <Session, TResult> target) {
-		Objects.requireNonNull (target);
+	public <TResult extends IBlock> TResult check (final Function <Session, TResult> target) {
+		if (!selected ()) {
+			tag ().click ();
+		}
+		return target.apply (session ());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see selebee.interfaces.ICheckbox#toggle(java.util.function.Function)
+	 */
+	@Override
+	public <TResult extends IBlock> TResult toggle (final Function <Session, TResult> target) {
 		tag ().click ();
+		return target.apply (session ());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see selebee.interfaces.ICheckbox#uncheck(java.util.function.Function)
+	 */
+	@Override
+	public <TResult extends IBlock> TResult uncheck (final Function <Session, TResult> target) {
+		if (selected ()) {
+			tag ().click ();
+		}
 		return target.apply (session ());
 	}
 }

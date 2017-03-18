@@ -21,48 +21,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.generic.IClickable;
+import selebee.interfaces.generic.IOption;
 import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
  * @param <TResult>
- * @since 13-Mar-2017 11:02:23 PM
+ * @since 16-Mar-2017 9:50:31 PM
  */
-public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
-		implements IClickable <TResult> {
-	protected final Function <Session, TResult> target;
-
+public class Option <TResult extends IBlock> extends Clickable <TResult> implements IOption <TResult> {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:50:51 PM
 	 * @param parent
 	 * @param locator
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
-		super (parent, locator);
-		this.target = target;
+	public Option (final IBlock parent, final By locator, final Function <Session, TResult> target) {
+		super (parent, locator, target);
 	}
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:51:09 PM
 	 * @param parent
 	 * @param tag
 	 * @param target
 	 */
-	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
-		super (parent, tag);
-		this.target = target;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see selebee.interfaces.generic.IClickable#click()
-	 */
-	@Override
-	public TResult click () {
-		return click (this.target);
+	public Option (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
+		super (parent, tag, target);
 	}
 }

@@ -15,10 +15,20 @@
  */
 package selebee.interfaces;
 
+import java.util.function.Function;
+
+import selebee.setup.Session;
+
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @since 16-Mar-2017 5:36:34 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface IDoubleClickable extends IClickable {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:38:24 PM
+	 * @param target
+	 * @return result
+	 */
+	<TResult extends IBlock> TResult doubleClick (Function <Session, TResult> target);
 }

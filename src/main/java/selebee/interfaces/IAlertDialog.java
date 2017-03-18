@@ -13,19 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.setup;
+package selebee.interfaces;
 
-import org.openqa.selenium.WebDriver;
+import java.util.function.Function;
+
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
- * @since 13-Mar-2017 2:45:26 PM
+ * @since 16-Mar-2017 4:50:57 PM
  */
-public interface IDriverEnvironment {
+public interface IAlertDialog extends IBlock, IHasText {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 2:45:48 PM
-	 * @return driver
+	 * @since 16-Mar-2017 4:55:05 PM
+	 * @param target
+	 * @return result
 	 */
-	WebDriver createDriver ();
+	<TResult extends IBlock> TResult accept (Function <Session, TResult> target);
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 4:55:40 PM
+	 * @param target
+	 * @return result
+	 */
+	<TResult extends IBlock> TResult dismiss (Function <Session, TResult> target);
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 4:56:24 PM
+	 * @param text
+	 * @return alertDialog
+	 */
+	IAlertDialog enterText (String text);
 }

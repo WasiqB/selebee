@@ -15,10 +15,28 @@
  */
 package selebee.interfaces;
 
+import java.util.function.Function;
+
+import selebee.setup.Session;
+
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @since 16-Mar-2017 5:52:11 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface INumericField extends ITextField {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:53:09 PM
+	 * @param value
+	 * @param target
+	 * @return result
+	 */
+	<TResult extends IBlock> TResult enterNumber (double value, Function <Session, TResult> target);
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:53:27 PM
+	 * @return value
+	 */
+	double value ();
 }

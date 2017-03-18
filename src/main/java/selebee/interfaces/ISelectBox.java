@@ -15,10 +15,17 @@
  */
 package selebee.interfaces;
 
+import java.util.List;
+
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @since 16-Mar-2017 5:27:11 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface ISelectBox extends IElement {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:27:44 PM
+	 * @return options
+	 */
+	List <IOption> options ();
 }

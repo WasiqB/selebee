@@ -13,12 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.interfaces;
+package selebee.interfaces.generic;
+
+import selebee.interfaces.IBlock;
 
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @param <TResult>
+ * @since 16-Mar-2017 5:34:31 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface ICheckbox <TResult extends IBlock> extends selebee.interfaces.ICheckbox {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:35:44 PM
+	 * @return result
+	 */
+	TResult check ();
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:35:47 PM
+	 * @return result
+	 */
+	TResult toggle ();
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:35:51 PM
+	 * @return result
+	 */
+	TResult uncheck ();
 }

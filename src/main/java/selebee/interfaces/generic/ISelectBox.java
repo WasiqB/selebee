@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.interfaces;
+package selebee.interfaces.generic;
+
+import java.util.List;
+
+import selebee.interfaces.IBlock;
+import selebee.interfaces.IElement;
 
 /**
  * @author wasiq.bhamla
- * @since 05-Mar-2017 6:09:17 PM
+ * @param <TResult>
+ * @since 16-Mar-2017 5:28:10 PM
  */
-public interface IBlock extends IElement {
-	// Marker interface.
+public interface ISelectBox <TResult extends IBlock> extends IElement {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:30:58 PM
+	 * @return options
+	 */
+	List <IOption <TResult>> options ();
 }

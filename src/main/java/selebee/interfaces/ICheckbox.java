@@ -13,38 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.setup;
+package selebee.interfaces;
 
-import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
-import org.openqa.selenium.chrome.ChromeDriver;
+import selebee.setup.Session;
 
 /**
  * @author wasiq.bhamla
- * @since 13-Mar-2017 3:08:13 PM
+ * @since 16-Mar-2017 5:31:48 PM
  */
-public class Chrome extends SimpleDriverEnvironment <ChromeDriver> {
-	static {
-		final String dir = System.getProperty ("user.dir");
-		final String path = dir + "/src/test/resources/chromedriver.exe";
-		System.setProperty ("webdriver.chrome.driver", path);
-	}
+public interface ICheckbox extends IElement, ISelectable {
+	/**
+	 * @author wasiq.bhamla
+	 * @since 16-Mar-2017 5:33:19 PM
+	 * @param target
+	 * @return result
+	 */
+	<TResult extends IBlock> TResult check (Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 3:08:59 PM
+	 * @since 16-Mar-2017 5:33:32 PM
+	 * @param target
+	 * @return result
 	 */
-	public Chrome () {
-		super ();
-	}
+	<TResult extends IBlock> TResult toggle (Function <Session, TResult> target);
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 3:08:52 PM
-	 * @param timeUnit
-	 * @param time
+	 * @since 16-Mar-2017 5:33:36 PM
+	 * @param target
+	 * @return result
 	 */
-	public Chrome (final TimeUnit timeUnit, final long time) {
-		super (timeUnit, time);
-	}
+	<TResult extends IBlock> TResult uncheck (Function <Session, TResult> target);
 }

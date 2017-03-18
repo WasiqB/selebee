@@ -13,56 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package selebee.implementation.generic;
+package selebee.implementation;
 
-import java.util.function.Function;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selebee.interfaces.IBlock;
-import selebee.interfaces.generic.IClickable;
-import selebee.setup.Session;
+import selebee.interfaces.IOption;
+import selebee.interfaces.ISelectBox;
 
 /**
  * @author wasiq.bhamla
- * @param <TResult>
- * @since 13-Mar-2017 11:02:23 PM
+ * @since 16-Mar-2017 9:55:02 PM
  */
-public class Clickable <TResult extends IBlock> extends selebee.implementation.Clickable
-		implements IClickable <TResult> {
-	protected final Function <Session, TResult> target;
-
+public class SelectBox extends Element implements ISelectBox {
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:55:03 PM
 	 * @param parent
 	 * @param locator
-	 * @param target
 	 */
-	public Clickable (final IBlock parent, final By locator, final Function <Session, TResult> target) {
+	public SelectBox (final IBlock parent, final By locator) {
 		super (parent, locator);
-		this.target = target;
 	}
 
 	/**
 	 * @author wasiq.bhamla
-	 * @since 13-Mar-2017 11:02:23 PM
+	 * @since 16-Mar-2017 9:55:03 PM
 	 * @param parent
 	 * @param tag
-	 * @param target
 	 */
-	public Clickable (final IBlock parent, final WebElement tag, final Function <Session, TResult> target) {
+	public SelectBox (final IBlock parent, final WebElement tag) {
 		super (parent, tag);
-		this.target = target;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see selebee.interfaces.generic.IClickable#click()
+	 * @see selebee.interfaces.ISelectBox#options()
 	 */
 	@Override
-	public TResult click () {
-		return click (this.target);
+	public List <IOption> options () {
+		return findElements (By.tagName ("option")).stream ()
+			.filter (e -> e.isDisplayed ())
+			.map (e -> new Option (this, e))
+			.collect (Collectors.toList ());
 	}
 }
