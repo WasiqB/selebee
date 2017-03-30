@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 
 import selebee.implementation.generic.Clickable;
 import selebee.interfaces.generic.IClickable;
+import selebee.poc.pages.controls.OrderItemCollection;
 import selebee.setup.Session;
 
 /**
@@ -38,6 +39,25 @@ public class MyStorePage extends MainPage {
 		super (session);
 		this.wait.until ((Predicate <WebDriver>) d -> d.getTitle ()
 			.endsWith ("My Store"));
+	}
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 25-Mar-2017 7:50:33 PM
+	 * @return items
+	 */
+	public OrderItemCollection items () {
+		return new OrderItemCollection (this, By.cssSelector (".product_list.grid.row"));
+	}
+
+	/**
+	 * @author wasiq.bhamla
+	 * @since 25-Mar-2017 7:06:22 PM
+	 * @param title
+	 * @return element
+	 */
+	public IClickable <MyStorePage> option (final String title) {
+		return new Clickable <> (this, By.linkText (title), e -> new MyStorePage (session ()));
 	}
 
 	/**
